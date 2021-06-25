@@ -19,7 +19,7 @@ inquirer
       ],
     },
   ])
-  .then((answers) => {
+  .then((answers: { platform: string }) => {
     const platform = answers.platform;
     const urls = [
       `https://www.metacritic.com/browse/games/release-date/available/${platform}/userscore`,
@@ -28,30 +28,39 @@ inquirer
     getGames(urls);
   });
 
-async function getGames(urls) {
+type Review = { title: string; score: number };
+
+async function getGames(urls: string[]) {
   const browser = await puppeteer.launch({ headless: false });
 
-  const collect = async (url) => {
+  const collect = async (url: string) => {
     const page = await browser.newPage();
     await page.goto(url);
     return await page.evaluate(() => {
       let allWraps = document.querySelectorAll(".clamp-summary-wrap");
-      let reviews = [];
+      let reviews: Review[] = [];
       allWraps.forEach((wrap) => {
         const title = wrap.querySelector(".title h3");
         const score = wrap.querySelector(".metascore_anchor div");
         reviews.push({
-          title: title.textContent,
-          score: score.textContent,
+          title: title?.textContent as string,
+          score: parseFloat(score?.textContent as string),
         });
       });
       return reviews;
     });
   };
 
-  const allReviews = await Promise.all(urls.map(collect));
+  const allReviews = (await Promise.all(urls.map(collect))) as unknown as [
+    Review[],
+    Review[]
+  ];
 
-  const bestGames = [];
+  const bestGames: {
+    title: string;
+    media_score: number;
+    user_score: number;
+  }[] = [];
   allReviews[0].forEach((review0) => {
     allReviews[1].forEach((review1) => {
       if (

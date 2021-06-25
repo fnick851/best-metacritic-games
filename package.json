@@ -4,7 +4,7 @@
   "description": "Find the best metacritic games.",
   "main": "best-games.js",
   "scripts": {
-    "start": "node best-games.js"
+    "start": "ts-node best-games.ts"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/fnick851/best-metacritic-games#readme",
   "dependencies": {
+    "@types/inquirer": "^7.3.2",
+    "@types/puppeteer": "^5.4.3",
     "inquirer": "^8.1.1",
-    "puppeteer": "^10.0.0"
+    "puppeteer": "^10.0.0",
+    "ts-node": "^10.0.0"
   },
   "volta": {
     "node": "16.4.0"
