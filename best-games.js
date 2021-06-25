@@ -18,4 +18,4 @@ userReviews.forEach((userReview) => {
   });
 });
 
-console.log(bestGames);
+console.table(bestGames);
