@@ -69,5 +69,5 @@ async function getGames(urls) {
   });
 
   console.table(bestGames);
-  process.exit(1);
+  process.exit(0);
 }
