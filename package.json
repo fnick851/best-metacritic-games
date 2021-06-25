@@ -1,0 +1,24 @@
+{
+  "name": "best-metacritic-games",
+  "version": "1.0.0",
+  "description": "Find the best metacritic games.",
+  "main": "best-games.js",
+  "scripts": {
+    "start": "node best-games.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fnick851/best-metacritic-games.git"
+  },
+  "keywords": [],
+  "author": "Hanlun Song",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fnick851/best-metacritic-games/issues"
+  },
+  "homepage": "https://github.com/fnick851/best-metacritic-games#readme",
+  "dependencies": {
+    "inquirer": "^8.1.1",
+    "puppeteer": "^10.0.0"
+  }
+}
