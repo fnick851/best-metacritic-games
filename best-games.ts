@@ -1,5 +1,5 @@
-const puppeteer = require("puppeteer");
-const inquirer = require("inquirer");
+import puppeteer from "puppeteer";
+import inquirer from "inquirer";
 
 inquirer
   .prompt([
@@ -28,7 +28,12 @@ inquirer
     getGames(urls);
   });
 
-type Review = { title: string; score: number };
+type ReviewEntry = { title: string; score: number };
+type ResultEntry = {
+  title: string;
+  media_score: number;
+  user_score: number;
+};
 
 async function getGames(urls: string[]) {
   const browser = await puppeteer.launch({ headless: false });
@@ -37,8 +42,8 @@ async function getGames(urls: string[]) {
     const page = await browser.newPage();
     await page.goto(url);
     return await page.evaluate(() => {
-      let allWraps = document.querySelectorAll(".clamp-summary-wrap");
-      let reviews: Review[] = [];
+      const allWraps = document.querySelectorAll(".clamp-summary-wrap");
+      const reviews: ReviewEntry[] = [];
       allWraps.forEach((wrap) => {
         const title = wrap.querySelector(".title h3");
         const score = wrap.querySelector(".metascore_anchor div");
@@ -52,15 +57,11 @@ async function getGames(urls: string[]) {
   };
 
   const allReviews = (await Promise.all(urls.map(collect))) as unknown as [
-    Review[],
-    Review[]
+    ReviewEntry[],
+    ReviewEntry[]
   ];
 
-  const bestGames: {
-    title: string;
-    media_score: number;
-    user_score: number;
-  }[] = [];
+  const bestGames: ResultEntry[] = [];
   allReviews[0].forEach((review0) => {
     allReviews[1].forEach((review1) => {
       if (
