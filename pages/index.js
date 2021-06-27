@@ -13,7 +13,8 @@ export default function Home() {
   let bodyText =
     "Choose platform, minimum media score, and minimum user score.";
   if (apiError) {
-    bodyText = "api err";
+    bodyText =
+      "Serverless function timeout. Try increase your minimum scores since I am using a free hosting and the platform you've chosen might have too many games to scrape.";
   } else if (showGamesClicked && !loading && reviews.length === 0) {
     bodyText = "No games found.";
   }
