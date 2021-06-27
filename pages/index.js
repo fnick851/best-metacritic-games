@@ -8,10 +8,21 @@ export default function Home() {
   const [mediaScoreAsc, setMediaScoreAsc] = useState(false);
   const [userScoreAsc, setUserScoreAsc] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(false);
+
+  let bodyText =
+    "Choose platform, minimum media score, and minimum user score.";
+  if (apiError) {
+    bodyText = "api err";
+  } else if (showGamesClicked && !loading && reviews.length === 0) {
+    bodyText = "No games found.";
+  }
 
   const submitForm = async (event) => {
     event.preventDefault();
+    setApiError(false);
     setLoading(true);
+    setShowGamesClicked(true);
 
     const platform = event.target.platform.value;
     const minMediaScore = parseFloat(event.target.min_mediascore.value);
@@ -20,11 +31,16 @@ export default function Home() {
     const res = await fetch(
       `/api/reviews?platform=${platform}&min_mediascore=${minMediaScore}&min_userscore=${minUserScore}`
     );
-    const result = await res.json();
     setLoading(false);
 
+    const status = res.status;
+    if (status === 504) {
+      setApiError(true);
+      return;
+    }
+
+    const result = await res.json();
     setReviews(result);
-    setShowGamesClicked(true);
   };
 
   const sortTable = (scoreKey, asc) => {
@@ -185,11 +201,7 @@ export default function Home() {
       </div>
 
       {reviews.length === 0 ? (
-        <p className="text-center mt-20 text-gray-400 text-3xl">
-          {!showGamesClicked
-            ? "Choose platform, minimum media score, and minimum user score."
-            : "No games found."}
-        </p>
+        <p className="text-center mt-20 text-gray-400 text-3xl">{bodyText}</p>
       ) : (
         <div className="flex flex-col">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
