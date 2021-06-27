@@ -1,0 +1,1 @@
+GET http://localhost:3000/api/reviews?platform=ps4&min_mediascore=85&min_userscore=8.5
