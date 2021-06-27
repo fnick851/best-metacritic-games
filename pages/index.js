@@ -14,7 +14,7 @@ export default function Home() {
     "Choose platform, minimum media score, and minimum user score.";
   if (apiError) {
     bodyText =
-      "Serverless function timeout. Try increase your minimum scores since I am using a free hosting and the platform you've chosen might have too many games to scrape.";
+      "Serverless function timeout. Try increase the minimum scores since I'm using a free hosting and there might be too many games to scrape.";
   } else if (showGamesClicked && !loading && reviews.length === 0) {
     bodyText = "No games found.";
   }
