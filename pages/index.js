@@ -32,7 +32,7 @@ export default function Home() {
     setLoading(false);
     try {
       const res = await fetch(
-        `/api/reviews11?platform=${platform}&min_mediascore=${minMediaScore}&min_userscore=${minUserScore}`
+        `/api/reviews?platform=${platform}&min_mediascore=${minMediaScore}&min_userscore=${minUserScore}`
       );
 
       if (!res.ok)
