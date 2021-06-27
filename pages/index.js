@@ -29,11 +29,11 @@ export default function Home() {
     const minMediaScore = parseFloat(event.target.min_mediascore.value);
     const minUserScore = parseFloat(event.target.min_userscore.value);
 
-    setLoading(false);
     try {
       const res = await fetch(
         `/api/reviews?platform=${platform}&min_mediascore=${minMediaScore}&min_userscore=${minUserScore}`
       );
+      setLoading(false);
 
       if (!res.ok)
         throw new Error(
@@ -43,12 +43,8 @@ export default function Home() {
       const result = await res.json();
       setReviews(result);
     } catch (err) {
-      // const status = res.status;
-      // if (status === 504) {
-      //   setApiError(true);
-      //   return;
-      // }
       console.error(err);
+      setApiError(true);
     }
   };
 
