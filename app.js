@@ -36,58 +36,41 @@ inquirer
     const minUserScore = parseFloat(answers.userscore);
     const metaReviews = [];
     const userReviews = [];
-    getReviews(
+
+    await addReviewToListWithMinScore(
       metaScoreBaseUrl,
+      0,
       metaReviews,
-      userScoreBaseUrl,
-      userReviews,
       minMetaScore,
-      minUserScore
+      ".clamp-metascore"
     );
-  });
+    await addReviewToListWithMinScore(
+      userScoreBaseUrl,
+      0,
+      userReviews,
+      minUserScore,
+      ".clamp-userscore"
+    );
 
-async function getReviews(
-  metaScoreBaseUrl,
-  metaReviews,
-  userScoreBaseUrl,
-  userReviews,
-  minMetaScore,
-  minUserScore
-) {
-  await addReviewToListWithMinScore(
-    metaScoreBaseUrl,
-    0,
-    metaReviews,
-    minMetaScore,
-    ".clamp-metascore"
-  );
-  await addReviewToListWithMinScore(
-    userScoreBaseUrl,
-    0,
-    userReviews,
-    minUserScore,
-    ".clamp-userscore"
-  );
-
-  const bestGames = [];
-  metaReviews.forEach((metaReview) => {
-    userReviews.forEach((userReview) => {
-      if (
-        metaReview.title === userReview.title &&
-        metaReview.score >= minMetaScore &&
-        userReview.score >= minUserScore
-      ) {
-        bestGames.push({
-          Title: metaReview.title,
-          Mediascore: metaReview.score,
-          Userscore: userReview.score,
-        });
-      }
+    const bestGames = [];
+    metaReviews.forEach((metaReview) => {
+      userReviews.forEach((userReview) => {
+        if (
+          metaReview.title === userReview.title &&
+          metaReview.score >= minMetaScore &&
+          userReview.score >= minUserScore
+        ) {
+          bestGames.push({
+            Title: metaReview.title,
+            Mediascore: metaReview.score,
+            Userscore: userReview.score,
+          });
+        }
+      });
     });
-  });
 
-  console.table(bestGames);
-}
+    console.table(bestGames);
+  });
 
 async function addReviewToListWithMinScore(
   baseUrl,
