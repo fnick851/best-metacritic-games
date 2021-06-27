@@ -29,19 +29,27 @@ export default function Home() {
     const minMediaScore = parseFloat(event.target.min_mediascore.value);
     const minUserScore = parseFloat(event.target.min_userscore.value);
 
-    const res = await fetch(
-      `/api/reviews?platform=${platform}&min_mediascore=${minMediaScore}&min_userscore=${minUserScore}`
-    );
     setLoading(false);
+    try {
+      const res = await fetch(
+        `/api/reviews11?platform=${platform}&min_mediascore=${minMediaScore}&min_userscore=${minUserScore}`
+      );
 
-    const status = res.status;
-    if (status === 504) {
-      setApiError(true);
-      return;
+      if (!res.ok)
+        throw new Error(
+          "response not ok - " + res.status + " " + res.statusText
+        );
+
+      const result = await res.json();
+      setReviews(result);
+    } catch (err) {
+      // const status = res.status;
+      // if (status === 504) {
+      //   setApiError(true);
+      //   return;
+      // }
+      console.error(err);
     }
-
-    const result = await res.json();
-    setReviews(result);
   };
 
   const sortTable = (scoreKey, asc) => {
