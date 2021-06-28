@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }) {
           rel="apple-touch-icon"
           type="image/png"
           sizes="180x180"
-          href="/icon/apple-touch-icon.png"
+          href="/icons/apple-touch-icon.png"
         />
 
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
