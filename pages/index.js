@@ -68,7 +68,7 @@ export default function Home() {
     <div className="min-h-screen">
       <div className="bg-gray-800">
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-between">
-          <div className="max-w-2xl mb-10">
+          <div className="max-w-2xl mb-10 mx-auto lg:mx-0 px-5 lg:px-0">
             <h2 className="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
               Best Metacritic Games
             </h2>
@@ -93,7 +93,7 @@ export default function Home() {
               find these games.
             </p>
           </div>
-          <div className="w-full max-w-xs mt-3">
+          <div className="w-full max-w-xs mt-3 mx-auto lg:mx-0">
             <form onSubmit={submitForm}>
               <div className="mb-5">
                 <label
@@ -200,7 +200,9 @@ export default function Home() {
       </div>
 
       {reviews.length === 0 ? (
-        <p className="text-center py-20 text-gray-400 text-3xl">{bodyText}</p>
+        <p className="text-center py-20 text-gray-400 text-3xl px-10 md:px-0">
+          {bodyText}
+        </p>
       ) : (
         <div className="max-w-7xl mx-auto flex-grow">
           <div className="flex flex-col">
