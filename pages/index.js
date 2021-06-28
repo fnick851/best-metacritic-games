@@ -23,6 +23,7 @@ export default function Home() {
   const submitForm = async (event) => {
     event.preventDefault();
     setApiError(false);
+    setReviews([]);
     setLoading(true);
     setShowGamesClicked(true);
 
@@ -188,7 +189,7 @@ export default function Home() {
         </div>
       </div>
 
-      {reviews.length === 0 ? (
+      {reviews.length === 0 || apiError ? (
         <p className="text-center py-20 text-gray-400 text-3xl px-10 md:px-0">
           {bodyText}
         </p>
