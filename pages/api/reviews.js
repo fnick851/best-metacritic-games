@@ -36,6 +36,7 @@ export default async (req, res) => {
       ) {
         bestGames.push({
           Title: metaReview.title,
+          Link: metaReview.href,
           Mediascore: metaReview.score,
           Userscore: userReview.score,
         });
@@ -58,13 +59,16 @@ async function addReviewToListWithMinScore(
   const $ = cheerio.load(pageBody);
 
   $(".clamp-summary-wrap").each((i, el) => {
-    const title = $(el).find(".title h3").text().trim();
+    const title = $(el).find("a.title h3").text().trim();
     const score = parseFloat(
       $(el).find(`${scoreCssSelector} .metascore_w`).text()
     );
+    const href = $(el).find("a.title")[0].attribs.href;
+
     reviewList.push({
       title,
       score,
+      href,
     });
   });
 

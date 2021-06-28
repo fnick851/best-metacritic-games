@@ -238,7 +238,13 @@ export default function Home() {
                           }
                         >
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {review.Title}
+                            <a
+                              href={"https://www.metacritic.com" + review.Link}
+                              target="_blank"
+                              className="hover:underline"
+                            >
+                              {review.Title}
+                            </a>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {review.Mediascore}
