@@ -85,7 +85,7 @@ export default function Home() {
     {
       id: "min_mediascore",
       label: "Minimum Media Score",
-      defaultVal: "8.5",
+      defaultVal: "85",
       options: [
         { value: 60, text: "60" },
         { value: 65, text: "65" },
@@ -100,7 +100,7 @@ export default function Home() {
     {
       id: "min_userscore",
       label: "Minimum User Score",
-      defaultVal: "85",
+      defaultVal: "8.5",
       options: [
         { value: 6.0, text: "6.0" },
         { value: 6.5, text: "6.5" },
