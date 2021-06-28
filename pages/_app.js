@@ -5,8 +5,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
@@ -19,7 +17,6 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#317EFB" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-starturl" content="/" />
 
         <title>Best Metacritic Games</title>
 

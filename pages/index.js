@@ -1,5 +1,7 @@
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useState } from "react";
+import UpArrow from "../components/UpArrow";
+import DownArrow from "../components/DownArrow";
 
 export default function Home() {
   const [reviews, setReviews] = useState([]);
@@ -64,6 +66,54 @@ export default function Home() {
     sortTable("Userscore", userScoreAsc);
   };
 
+  const dropdowns = [
+    {
+      id: "platform",
+      label: "Platform",
+      defaultVal: "ps4",
+      options: [
+        { value: "ps4", text: "PlayStation 4" },
+        { value: "ps5", text: "PlayStation 5" },
+        { value: "xboxone", text: "Xbox One" },
+        { value: "xbox-series-x", text: "Xbox Series X" },
+        { value: "switch", text: "Switch" },
+        { value: "pc", text: "PC" },
+        { value: "ios", text: "iOS" },
+        { value: "stadia", text: "Stadia" },
+      ],
+    },
+    {
+      id: "min_mediascore",
+      label: "Minimum Media Score",
+      defaultVal: "8.5",
+      options: [
+        { value: 60, text: "60" },
+        { value: 65, text: "65" },
+        { value: 70, text: "70" },
+        { value: 75, text: "75" },
+        { value: 80, text: "80" },
+        { value: 85, text: "85" },
+        { value: 90, text: "90" },
+        { value: 95, text: "95" },
+      ],
+    },
+    {
+      id: "min_userscore",
+      label: "Minimum User Score",
+      defaultVal: "85",
+      options: [
+        { value: 6.0, text: "6.0" },
+        { value: 6.5, text: "6.5" },
+        { value: 7.0, text: "7.0" },
+        { value: 7.5, text: "7.5" },
+        { value: 8.0, text: "8.0" },
+        { value: 8.5, text: "8.5" },
+        { value: 9.0, text: "9.0" },
+        { value: 9.5, text: "9.5" },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       <div className="bg-gray-800">
@@ -95,99 +145,38 @@ export default function Home() {
           </div>
           <div className="w-full max-w-xs mt-3 mx-auto lg:mx-0">
             <form onSubmit={submitForm}>
-              <div className="mb-5">
-                <label
-                  htmlFor="platform"
-                  className="block text-base font-medium text-gray-300"
-                >
-                  Platform
-                </label>
-                <div className="mt-1.5 relative">
-                  <select
-                    id="platform"
-                    name="plaftorm"
-                    className="appearance-none block w-full bg-none bg-gray-700 border border-transparent rounded-md pl-3 pr-10 py-2 text-base text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white sm:text-sm"
-                    defaultValue="ps4"
-                  >
-                    <option value="ps4">PlayStation 4</option>
-                    <option value="ps5">PlayStation 5</option>
-                    <option value="xboxone">Xbox One</option>
-                    <option value="xbox-series-x">Xbox Series X</option>
-                    <option value="switch">Switch</option>
-                    <option value="pc">PC</option>
-                    <option value="ios">iOS</option>
-                    <option value="stadia">Stadia</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center">
-                    <ChevronDownIcon
-                      className="h-4 w-4 text-white"
-                      aria-hidden="true"
-                    />
+              {dropdowns.map(
+                ({ id, label, defaultVal, options }, dropdownIdx) => (
+                  <div className="mb-5" key={dropdownIdx}>
+                    <label
+                      htmlFor={id}
+                      className="block text-base font-medium text-gray-300"
+                    >
+                      {label}
+                    </label>
+                    <div className="mt-1.5 relative">
+                      <select
+                        id={id}
+                        name={id}
+                        className="appearance-none block w-full bg-none bg-gray-700 border border-transparent rounded-md pl-3 pr-10 py-2 text-base text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white sm:text-sm"
+                        defaultValue={defaultVal}
+                      >
+                        {options.map(({ value, text }, optionIdx) => (
+                          <option value={value} key={optionIdx}>
+                            {text}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center">
+                        <ChevronDownIcon
+                          className="h-4 w-4 text-white"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="min_mediascore"
-                  className="block text-base font-medium text-gray-300"
-                >
-                  Minimum Media Score
-                </label>
-                <div className="mt-1.5 relative">
-                  <select
-                    id="min_mediascore"
-                    name="min_mediascore"
-                    className="appearance-none block w-full bg-none bg-gray-700 border border-transparent rounded-md pl-3 pr-10 py-2 text-base text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white sm:text-sm"
-                    defaultValue="85"
-                  >
-                    <option value="60">60</option>
-                    <option value="65">65</option>
-                    <option value="70">70</option>
-                    <option value="75">75</option>
-                    <option value="80">80</option>
-                    <option value="85">85</option>
-                    <option value="90">90</option>
-                    <option value="95">95</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center">
-                    <ChevronDownIcon
-                      className="h-4 w-4 text-white"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="min_userscore"
-                  className="block text-base font-medium text-gray-300"
-                >
-                  Minimum User Score
-                </label>
-                <div className="mt-1.5 relative">
-                  <select
-                    id="min_userscore"
-                    name="min_userscore"
-                    className="appearance-none block w-full bg-none bg-gray-700 border border-transparent rounded-md pl-3 pr-10 py-2 text-base text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white sm:text-sm"
-                    defaultValue="8.5"
-                  >
-                    <option value="6.0">6.0</option>
-                    <option value="6.5">6.5</option>
-                    <option value="7.0">7.0</option>
-                    <option value="7.5">7.5</option>
-                    <option value="8.0">8.0</option>
-                    <option value="8.5">8.5</option>
-                    <option value="9.0">9.0</option>
-                    <option value="9.5">9.5</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 px-2 flex items-center">
-                    <ChevronDownIcon
-                      className="h-4 w-4 text-white"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </div>
-              </div>
+                )
+              )}
               <button
                 type="submit"
                 className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
@@ -225,33 +214,7 @@ export default function Home() {
                         >
                           <span className="flex items-center">
                             Media Score{" "}
-                            {mediaScoreAsc ? (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            )}
+                            {mediaScoreAsc ? <DownArrow /> : <UpArrow />}
                           </span>
                         </th>
                         <th
@@ -261,33 +224,7 @@ export default function Home() {
                         >
                           <span className="flex items-center">
                             User Score{" "}
-                            {userScoreAsc ? (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            )}
+                            {userScoreAsc ? <DownArrow /> : <UpArrow />}
                           </span>
                         </th>
                       </tr>
