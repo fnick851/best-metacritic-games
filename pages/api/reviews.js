@@ -11,20 +11,22 @@ export default async (req, res) => {
   const metaReviews = [];
   const userReviews = [];
 
-  await addReviewToListWithMinScore(
-    metaScoreBaseUrl,
-    0,
-    metaReviews,
-    minMetaScore,
-    ".clamp-metascore"
-  );
-  await addReviewToListWithMinScore(
-    userScoreBaseUrl,
-    0,
-    userReviews,
-    minUserScore,
-    ".clamp-userscore"
-  );
+  await Promise.all([
+    addReviewToListWithMinScore(
+      metaScoreBaseUrl,
+      0,
+      metaReviews,
+      minMetaScore,
+      ".clamp-metascore"
+    ),
+    addReviewToListWithMinScore(
+      userScoreBaseUrl,
+      0,
+      userReviews,
+      minUserScore,
+      ".clamp-userscore"
+    ),
+  ]);
 
   const bestGames = [];
   metaReviews.forEach((metaReview) => {
