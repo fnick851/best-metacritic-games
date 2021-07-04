@@ -22,10 +22,10 @@ export default function Home() {
 
   const submitForm = async (event) => {
     event.preventDefault();
+    setShowGamesClicked(true);
     setApiError(false);
     setReviews([]);
     setLoading(true);
-    setShowGamesClicked(true);
 
     const platform = event.target.platform.value;
     const minMediaScore = parseFloat(event.target.min_mediascore.value);
