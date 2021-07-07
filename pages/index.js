@@ -4,6 +4,7 @@ import UpArrow from "../components/UpArrow";
 import DownArrow from "../components/DownArrow";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import I18nToggle from "../components/I18nToggle";
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
@@ -119,6 +120,9 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <div className="bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-right pt-3">
+          <I18nToggle />
+        </div>
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-between">
           <div className="max-w-2xl mb-10 mx-auto lg:mx-0 px-5 lg:px-0">
             <h2 className="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
