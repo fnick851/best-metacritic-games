@@ -14,7 +14,7 @@ const I18nToggle = () => {
       {({ open }) => (
         <>
           <div>
-            <Menu.Button className="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+            <Menu.Button className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-white text-xs text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
               {router.locale === "zh" ? "中文" : "English"}
               <ChevronDownIcon
                 className="-mr-1 ml-2 h-5 w-5"
@@ -35,7 +35,7 @@ const I18nToggle = () => {
           >
             <Menu.Items
               static
-              className="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="origin-top-right absolute right-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <div className="py-1">
                 {["en", "zh"].map((locale, localeIdx) => (
@@ -46,7 +46,7 @@ const I18nToggle = () => {
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
-                          "block px-4 py-2 text-sm cursor-pointer"
+                          "block px-2 py-1 text-xs cursor-pointer"
                         )}
                       >
                         <Link
