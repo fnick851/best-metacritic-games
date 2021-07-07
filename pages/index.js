@@ -120,10 +120,10 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <div className="bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-right pt-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-right pt-5">
           <I18nToggle />
         </div>
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-between">
+        <div className="max-w-7xl mx-auto py-5 px-4 sm:py-10 sm:px-6 lg:px-8 lg:flex lg:justify-between gap-5">
           <div className="max-w-2xl mb-10 mx-auto lg:mx-0 px-5 lg:px-0">
             <h2 className="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
               {t("title")}
