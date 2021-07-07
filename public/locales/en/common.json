@@ -1,0 +1,14 @@
+{
+    "started": "Choose platform, minimum media score, and minimum user score.",
+    "error": "Serverless function timeout. Try increase the minimum scores since I'm using a free hosting and there might be too many games to scrape.",
+    "no games": "No games found.",
+    "platform": "Platform",
+    "min media score": "Minimum Media Score",
+    "min user score": "Minimum User Score",
+    "title": "Best Metacritic Games",
+    "headline": "So many games and so little time.",
+    "body1": "You might want to spend the time on the \"best\" ones. Nowadays, I find neither media review score or user review score alone on ",
+    "body2": " is a reliable indicator of a good game for me. Due to marketing and various other reasons, a game could have a high media score but still boring or broken, while a high user score sometimes is boosted by certain niche fans. But if a game scores high on both, it is more likely a pretty decent one. You can use this tool to find these games.",
+    "button loading": "Loading...",
+    "button default": "Show Games"
+}

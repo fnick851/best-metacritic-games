@@ -2,22 +2,23 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import UpArrow from "../components/UpArrow";
 import DownArrow from "../components/DownArrow";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
-export default function Home() {
+const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [showGamesClicked, setShowGamesClicked] = useState(false);
   const [mediaScoreAsc, setMediaScoreAsc] = useState(false);
   const [userScoreAsc, setUserScoreAsc] = useState(false);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState(false);
+  const { t } = useTranslation("common");
 
-  let bodyText =
-    "Choose platform, minimum media score, and minimum user score.";
+  let bodyText = t("started");
   if (apiError) {
-    bodyText =
-      "Serverless function timeout. Try increase the minimum scores since I'm using a free hosting and there might be too many games to scrape.";
+    bodyText = t("error");
   } else if (showGamesClicked && !loading && reviews.length === 0) {
-    bodyText = "No games found.";
+    bodyText = t("no games");
   }
 
   const submitForm = async (event) => {
@@ -70,7 +71,7 @@ export default function Home() {
   const dropdowns = [
     {
       id: "platform",
-      label: "Platform",
+      label: t("platform"),
       defaultVal: "ps4",
       options: [
         { value: "ps4", text: "PlayStation 4" },
@@ -85,7 +86,7 @@ export default function Home() {
     },
     {
       id: "min_mediascore",
-      label: "Minimum Media Score",
+      label: t("min media score"),
       defaultVal: "85",
       options: [
         { value: 60, text: "60" },
@@ -100,7 +101,7 @@ export default function Home() {
     },
     {
       id: "min_userscore",
-      label: "Minimum User Score",
+      label: t("min user score"),
       defaultVal: "8.5",
       options: [
         { value: 6.0, text: "6.0" },
@@ -121,27 +122,19 @@ export default function Home() {
         <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-between">
           <div className="max-w-2xl mb-10 mx-auto lg:mx-0 px-5 lg:px-0">
             <h2 className="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
-              Best Metacritic Games
+              {t("title")}
             </h2>
-            <p className="mt-5 text-2xl text-gray-300">
-              So many games and so little time.
-            </p>
+            <p className="mt-5 text-2xl text-gray-300">{t("headline")}</p>
             <p className="mt-5 text-xl text-gray-400">
-              You might want to spend the time on the "best" ones. Nowadays, I
-              find neither media review score or user review score alone on{" "}
+              {t("body1")}
               <a
                 target="_blank"
                 href="https://www.metacritic.com/"
                 className="underline"
               >
                 metacritic
-              </a>{" "}
-              is a reliable indicator of a good game for me. Due to marketing
-              and various other reasons, a game could have a high media score
-              but still boring or broken, while a high user score sometimes is
-              boosted by certain niche fans. But if a game scores high on both,
-              it is more likely a pretty decent one. You can use this tool to
-              find these games.
+              </a>
+              {t("body2")}
             </p>
           </div>
           <div className="w-full max-w-xs mt-3 mx-auto lg:mx-0">
@@ -182,7 +175,7 @@ export default function Home() {
                 type="submit"
                 className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
               >
-                {loading ? "Loading..." : "Show Games"}
+                {loading ? t("button loading") : t("button default")}
               </button>
             </form>
           </div>
@@ -265,4 +258,12 @@ export default function Home() {
       )}
     </div>
   );
-}
+};
+
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["common"])),
+  },
+});
+
+export default Home;
