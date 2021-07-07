@@ -38,24 +38,24 @@ const I18nToggle = () => {
               className="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <div className="py-1">
-                {["en", "zh"].map((locale) => (
-                  <Menu.Item>
+                {["en", "zh"].map((locale, localeIdx) => (
+                  <Menu.Item key={localeIdx}>
                     {({ active }) => (
-                      <Link
-                        href={locale === "zh" ? "/zh" : "/"}
-                        locale={locale}
+                      <span
+                        className={classNames(
+                          active
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-700",
+                          "block px-4 py-2 text-sm cursor-pointer"
+                        )}
                       >
-                        <span
-                          className={classNames(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm cursor-pointer"
-                          )}
+                        <Link
+                          href={locale === "zh" ? "/zh" : "/"}
+                          locale={locale}
                         >
                           {locale === "zh" ? "中文" : "English"}
-                        </span>
-                      </Link>
+                        </Link>
+                      </span>
                     )}
                   </Menu.Item>
                 ))}

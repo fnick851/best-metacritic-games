@@ -5,10 +5,7 @@ import { appWithTranslation } from "next-i18next";
 const MyApp = ({ Component, pageProps }) => (
   <>
     <Head>
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-      />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
       <meta
         name="description"
         content="A smart table to help you filter and find games that score high on metacritic."
@@ -53,7 +50,15 @@ const MyApp = ({ Component, pageProps }) => (
         href="/icons/apple-touch-icon.png"
       />
 
-      <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      <link
+        rel="preload"
+        href="https://rsms.me/inter/inter.css"
+        as="style"
+        onLoad="this.onload=null;this.rel='stylesheet'"
+      />
+      <noscript>
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      </noscript>
     </Head>
     <Component {...pageProps} />
   </>

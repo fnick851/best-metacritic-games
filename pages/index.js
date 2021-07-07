@@ -134,6 +134,7 @@ const Home = () => {
               <a
                 target="_blank"
                 href="https://www.metacritic.com/"
+                rel="noopener noreferrer"
                 className="underline"
               >
                 metacritic
@@ -177,7 +178,7 @@ const Home = () => {
               )}
               <button
                 type="submit"
-                className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
+                className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-600"
               >
                 {loading ? t("button loading") : t("button default")}
               </button>
@@ -187,7 +188,7 @@ const Home = () => {
       </div>
 
       {reviews.length === 0 || apiError ? (
-        <p className="text-center py-20 text-gray-400 text-3xl px-10 md:px-0">
+        <p className="text-center py-20 text-gray-500 text-3xl px-10 md:px-0">
           {bodyText}
         </p>
       ) : (
@@ -239,6 +240,7 @@ const Home = () => {
                             <a
                               href={"https://www.metacritic.com" + review.Link}
                               target="_blank"
+                              rel="noopener noreferrer"
                               className="hover:underline"
                             >
                               {review.Title}

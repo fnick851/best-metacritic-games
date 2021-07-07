@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import cheerio from "cheerio";
 
-export default async (req, res) => {
+const reviews = async (req, res) => {
   const { platform, min_mediascore, min_userscore } = req.query;
 
   const metaScoreBaseUrl = `https://www.metacritic.com/browse/games/release-date/available/${platform}/metascore?page=`;
@@ -88,3 +88,5 @@ async function addReviewToListWithMinScore(
     );
   }
 }
+
+export default reviews;
