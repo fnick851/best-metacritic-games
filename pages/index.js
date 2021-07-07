@@ -203,7 +203,7 @@ const Home = () => {
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
-                          Game Title
+                          {t("table col1")}
                         </th>
                         <th
                           scope="col"
@@ -211,7 +211,7 @@ const Home = () => {
                           onClick={sortMediaScore}
                         >
                           <span className="flex items-center">
-                            Media Score{" "}
+                            {t("table col2")}
                             {mediaScoreAsc ? <DownArrow /> : <UpArrow />}
                           </span>
                         </th>
@@ -221,7 +221,7 @@ const Home = () => {
                           onClick={sortUserScore}
                         >
                           <span className="flex items-center">
-                            User Score{" "}
+                            {t("table col3")}
                             {userScoreAsc ? <DownArrow /> : <UpArrow />}
                           </span>
                         </th>
