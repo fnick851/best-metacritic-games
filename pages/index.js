@@ -6,6 +6,46 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import I18nToggle from "../components/I18nToggle";
 
+function Slider({
+  labelText,
+  id,
+  maxVal,
+  minVal,
+  step,
+  defalutVal,
+  hasDecimal,
+}) {
+  const [value, setValue] = useState(defalutVal);
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  return (
+    <div className="mb-5">
+      <label htmlFor={id} className="block text-base font-medium text-gray-300">
+        {labelText}
+      </label>
+      <div className="mt-1.5 relative">
+        <div className="flex items-center gap-3">
+          <span className="text-white">
+            {hasDecimal ? parseFloat(value).toFixed(1) : value}
+          </span>
+          <input
+            type="range"
+            min={minVal}
+            max={maxVal}
+            step={step}
+            className="transparent h-[4px] w-full cursor-pointer appearance-none border-transparent bg-neutral-200 dark:bg-neutral-600"
+            id={id}
+            value={value}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [showGamesClicked, setShowGamesClicked] = useState(false);
@@ -85,36 +125,6 @@ const Home = () => {
         { value: "stadia", text: "Stadia" },
       ],
     },
-    {
-      id: "min_mediascore",
-      label: t("min media score"),
-      defaultVal: "85",
-      options: [
-        { value: 60, text: "60" },
-        { value: 65, text: "65" },
-        { value: 70, text: "70" },
-        { value: 75, text: "75" },
-        { value: 80, text: "80" },
-        { value: 85, text: "85" },
-        { value: 90, text: "90" },
-        { value: 95, text: "95" },
-      ],
-    },
-    {
-      id: "min_userscore",
-      label: t("min user score"),
-      defaultVal: "8.5",
-      options: [
-        { value: 6.0, text: "6.0" },
-        { value: 6.5, text: "6.5" },
-        { value: 7.0, text: "7.0" },
-        { value: 7.5, text: "7.5" },
-        { value: 8.0, text: "8.0" },
-        { value: 8.5, text: "8.5" },
-        { value: 9.0, text: "9.0" },
-        { value: 9.5, text: "9.5" },
-      ],
-    },
   ];
 
   return (
@@ -176,6 +186,23 @@ const Home = () => {
                   </div>
                 )
               )}
+              <Slider
+                labelText={t("min media score")}
+                id="min_mediascore"
+                minVal={0}
+                maxVal={100}
+                step={1}
+                defalutVal={80}
+              />
+              <Slider
+                labelText={t("min user score")}
+                id="min_userscore"
+                minVal={0}
+                maxVal={10}
+                step={0.1}
+                defalutVal={8.0}
+                hasDecimal
+              />
               <button
                 type="submit"
                 className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-600"
