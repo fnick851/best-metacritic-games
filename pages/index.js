@@ -129,7 +129,11 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <div className="bg-gray-800">
+      <div className="bg-gray-800 pt-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-2 mb-5 text-white">
+          <h1 className="text-3xl text-center my-4">{t("notice title")}</h1>
+          <p className="mb-6">{t("notice body")}</p>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-right pt-5">
           <I18nToggle />
         </div>
